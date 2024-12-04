@@ -36,9 +36,9 @@ interface TaskCardProps {
   index: number;
 }
 
-const TaskCard: React.FC<TaskCardProps> = memo(({ task, index }) => (
+const TaskCard = memo(({ task, index }: TaskCardProps) => (
   <Draggable draggableId={task.id} index={index}>
-    {(provided, snapshot): JSX.Element => (
+    {(provided, snapshot) => (
       <div
         ref={provided.innerRef}
         {...provided.draggableProps}
@@ -79,16 +79,18 @@ interface ColumnProps {
   tasks: Task[];
 }
 
-const Column: React.FC<ColumnProps> = memo(({ id, title, icon: Icon, tasks }) => (
+const Column = memo(({ id, title, icon: Icon, tasks }: { id: string, title: string, icon: React.ElementType, tasks: Task[] }) => (
   <Droppable droppableId={id}>
-    {(provided, snapshot): JSX.Element => (
+    {(provided, snapshot) => (
       <div
         ref={provided.innerRef}
+        {...provided.droppableProps}
         className={`
-          flex flex-col gap-4 p-4 bg-black/20 rounded-xl border
+          bg-black/20 p-4 rounded-xl border transition-all duration-300
           ${snapshot.isDraggingOver 
-            ? 'border-[#37e067] shadow-lg shadow-[#37e067]/20' 
-            : 'border-white/10'}
+            ? 'border-[#37e067]/50 bg-black/30 scale-[1.02] shadow-lg shadow-[#37e067]/10' 
+            : 'border-white/10 hover:border-white/20'}
+          min-h-[200px]
         `}
       >
         <div className="flex items-center space-x-2 mb-4">
