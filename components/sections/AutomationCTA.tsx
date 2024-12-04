@@ -35,16 +35,11 @@ const AutomationCTA = () => {
           >
             <div className="space-y-4 sm:space-y-6">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
-                Você está{' '}
-                <span className="text-[#37e067] relative inline-block group">
+                Você está <span className="text-[#37e067] relative inline-block group">
                   perdendo dinheiro
                   <div className="absolute -inset-1 bg-gradient-to-r from-[#37e067]/20 to-[#32c95d]/20 blur-lg rounded-lg -z-10 transition-all duration-300 group-hover:from-[#37e067]/30 group-hover:to-[#32c95d]/30"></div>
-                </span>{' '}
-                se ainda:
+                </span> se ainda:
               </h2>
-              <p className="text-xl text-gray-400">
-                Automatize seu atendimento e multiplique suas vendas com o ZappFlow
-              </p>
             </div>
 
             <ul className="space-y-4 sm:space-y-5">
