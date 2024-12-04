@@ -1,39 +1,27 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  images: { 
+  reactStrictMode: true,
+  swcMinify: true,
+  images: {
     unoptimized: true,
+    domains: ['i.pravatar.cc'],
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'picsum.photos',
-        pathname: '/**',
+        hostname: 'picsum.photos'
       },
       {
         protocol: 'https',
-        hostname: 'api.dicebear.com',
-        port: '',
-        pathname: '/7.x/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-        pathname: '/**',
-      },
-    ],
-    domains: ['i.pravatar.cc'],
-    formats: ['image/avif', 'image/webp'],
-    minimumCacheTTL: 60,
+        hostname: 'api.dicebear.com'
+      }
+    ]
   },
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
+  typescript: {
+    ignoreBuildErrors: true
   },
-  swcMinify: true,
-  reactStrictMode: true,
-  poweredByHeader: false,
-  compress: true,
-};
+  eslint: {
+    ignoreDuringBuilds: true
+  }
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig

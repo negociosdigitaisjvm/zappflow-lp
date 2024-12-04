@@ -1,175 +1,123 @@
 'use client';
 
-import React, { useState, useCallback, memo } from 'react';
-import { MessageSquare, Clock, CheckCircle, User } from 'lucide-react';
-import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
-import type { DropResult } from '@hello-pangea/dnd';
+import React from 'react';
+import { MessageSquare, Clock, CheckCircle, User2 } from 'lucide-react';
 
-interface Task {
-  id: string;
-  title: string;
-  customer: string;
-  time: string;
-  status: 'novo' | 'andamento' | 'concluido';
-}
-
-const initialTasks: Task[] = [
-  { id: '1', title: 'Suporte Técnico', customer: 'João Silva', time: '5min', status: 'novo' },
-  { id: '2', title: 'Dúvida sobre Produto', customer: 'Maria Santos', time: '10min', status: 'novo' },
-  { id: '3', title: 'Orçamento', customer: 'Pedro Costa', time: '15min', status: 'andamento' },
-  { id: '4', title: 'Instalação', customer: 'Ana Oliveira', time: '20min', status: 'andamento' },
-  { id: '5', title: 'Manutenção', customer: 'Carlos Souza', time: '30min', status: 'concluido' },
-  { id: '6', title: 'Agendamento', customer: 'Lucia Pereira', time: '8min', status: 'novo' },
-  { id: '7', title: 'Pós-venda', customer: 'Roberto Lima', time: '12min', status: 'andamento' },
-  { id: '8', title: 'Reclamação', customer: 'Sandra Melo', time: '25min', status: 'concluido' },
-  { id: '9', title: 'Cotação', customer: 'Fernando Costa', time: '18min', status: 'novo' }
-];
-
-const columns = [
-  { id: 'novo', title: 'Novos Atendimentos', icon: MessageSquare },
-  { id: 'andamento', title: 'Em Andamento', icon: Clock },
-  { id: 'concluido', title: 'Concluídos', icon: CheckCircle }
-] as const;
-
-interface TaskCardProps {
-  task: Task;
-  index: number;
-}
-
-const TaskCard = memo(({ task, index }: TaskCardProps) => (
-  <Draggable draggableId={task.id} index={index}>
-    {(provided, snapshot) => (
-      <div
-        ref={provided.innerRef}
-        {...provided.draggableProps}
-        {...provided.dragHandleProps}
-        className={`
-          bg-black/40 p-4 rounded-lg border
-          transform transition-all duration-300 ease-in-out
-          ${snapshot.isDragging 
-            ? 'border-[#37e067] shadow-lg shadow-[#37e067]/20 scale-[1.02] rotate-[1deg] z-50' 
-            : 'border-white/10 hover:border-[#37e067]/30 hover:scale-[1.01]'}
-        `}
-      >
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-[#37e067] font-medium">{task.title}</span>
-          <MessageSquare className="w-4 h-4 text-gray-400" />
-        </div>
-        <div className="flex items-center text-sm text-gray-400 space-x-4">
-          <div className="flex items-center">
-            <User className="w-3 h-3 mr-1" />
-            {task.customer}
-          </div>
-          <div className="flex items-center">
-            <Clock className="w-3 h-3 mr-1" />
-            {task.time}
-          </div>
-        </div>
-      </div>
-    )}
-  </Draggable>
-));
-
-TaskCard.displayName = 'TaskCard';
-
-interface ColumnProps {
-  id: string;
-  title: string;
-  icon: React.ElementType;
-  tasks: Task[];
-}
-
-const Column = memo(({ id, title, icon: Icon, tasks }: { id: string, title: string, icon: React.ElementType, tasks: Task[] }) => (
-  <Droppable droppableId={id}>
-    {(provided, snapshot) => (
-      <div
-        ref={provided.innerRef}
-        {...provided.droppableProps}
-        className={`
-          bg-black/20 p-4 rounded-xl border transition-all duration-300
-          ${snapshot.isDraggingOver 
-            ? 'border-[#37e067]/50 bg-black/30 scale-[1.02] shadow-lg shadow-[#37e067]/10' 
-            : 'border-white/10 hover:border-white/20'}
-          min-h-[200px]
-        `}
-      >
-        <div className="flex items-center space-x-2 mb-4">
-          <Icon className={`w-5 h-5 ${snapshot.isDraggingOver ? 'text-[#37e067]' : 'text-gray-400'} transition-colors duration-300`} />
-          <h3 className="text-white font-medium">{title}</h3>
-          <span className={`px-2 py-1 rounded text-sm transition-colors duration-300 ${
-            snapshot.isDraggingOver 
-              ? 'bg-[#37e067]/20 text-[#37e067]' 
-              : 'bg-white/10 text-gray-400'
-          }`}>
-            {tasks.length}
-          </span>
-        </div>
-        <div className="space-y-3">
-          {tasks.map((task, index) => (
-            <TaskCard key={task.id} task={task} index={index} />
-          ))}
-          {provided.placeholder}
-        </div>
-      </div>
-    )}
-  </Droppable>
-));
-
-Column.displayName = 'Column';
-
-const InteractiveKanban: React.FC = () => {
-  const [tasks, setTasks] = useState<Task[]>(initialTasks);
-
-  const tasksByColumn = useCallback((columnId: Task['status']) => 
-    tasks.filter(task => task.status === columnId),
-    [tasks]
-  );
-
-  const onDragEnd = useCallback((result: DropResult) => {
-    if (!result.destination) return;
-
-    const { source, destination } = result;
-    const allTasks = Array.from(tasks);
-    const [movedTask] = allTasks.splice(source.index, 1);
-    
-    (movedTask as Task).status = destination.droppableId as Task['status'];
-    allTasks.splice(destination.index, 0, movedTask);
-    
-    setTasks(allTasks);
-  }, [tasks]);
-
+const AnimatedKanban = () => {
   return (
-    <div className="bg-black/50 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-      <div className="flex items-center justify-between mb-6 border-b border-white/10 pb-4">
-        <div className="flex items-center space-x-2">
-          <div className="w-3 h-3 rounded-full bg-red-500" />
-          <div className="w-3 h-3 rounded-full bg-yellow-500" />
-          <div className="w-3 h-3 rounded-full bg-green-500" />
-        </div>
-        <div className="text-white/60 text-sm">ZappFlow - Kanban de Atendimentos</div>
-      </div>
+    <div className="w-full max-w-6xl mx-auto px-3 sm:px-4 py-6 sm:py-12 overflow-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
+        {/* Coluna Novos */}
+        <div className="bg-gradient-to-b from-zinc-900/90 to-black/80 p-3 sm:p-4 rounded-xl border border-zinc-800 min-h-[250px] sm:min-h-[400px]">
+          <div className="flex items-center space-x-2 mb-3 sm:mb-4">
+            <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5 text-[#37e067]" />
+            <h3 className="font-semibold text-base sm:text-lg text-white">Novos</h3>
+          </div>
+          
+          {/* Cards Estáticos */}
+          <div className="space-y-2 sm:space-y-3">
+            <div className="bg-zinc-900 p-2.5 sm:p-3 rounded-lg border border-zinc-800">
+              <div className="flex justify-between items-start mb-1.5 sm:mb-2">
+                <h4 className="font-medium text-sm sm:text-base text-white">Orçamento Website</h4>
+                <span className="text-xs bg-zinc-800 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[#37e067]">2min</span>
+              </div>
+              <div className="flex items-center space-x-1.5 sm:space-x-2">
+                <User2 className="w-3 h-3 text-zinc-400" />
+                <p className="text-xs sm:text-sm text-zinc-400">Ana Paula</p>
+              </div>
+            </div>
 
-      <div className="mb-6 bg-[#37e067]/10 p-4 rounded-lg border border-[#37e067]/20">
-        <p className="text-white text-center">
-          ✨ Arraste os cards entre as colunas para gerenciar seus atendimentos
-        </p>
-      </div>
+            {/* Card Animado que se move */}
+            <div className="animate-slide-through bg-zinc-900 p-2.5 sm:p-3 rounded-lg border border-zinc-800">
+              <div className="flex justify-between items-start mb-1.5 sm:mb-2">
+                <h4 className="font-medium text-sm sm:text-base text-white">Suporte Técnico</h4>
+                <span className="text-xs bg-zinc-800 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[#37e067]">5min</span>
+              </div>
+              <div className="flex items-center space-x-1.5 sm:space-x-2">
+                <User2 className="w-3 h-3 text-zinc-400" />
+                <p className="text-xs sm:text-sm text-zinc-400">João Silva</p>
+              </div>
+            </div>
 
-      <DragDropContext onDragEnd={onDragEnd}>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {columns.map(({ id, title, icon }) => (
-            <Column
-              key={id}
-              id={id}
-              title={title}
-              icon={icon}
-              tasks={tasksByColumn(id)}
-            />
-          ))}
+            <div className="bg-zinc-900 p-2.5 sm:p-3 rounded-lg border border-zinc-800">
+              <div className="flex justify-between items-start mb-1.5 sm:mb-2">
+                <h4 className="font-medium text-sm sm:text-base text-white">Dúvida Integração</h4>
+                <span className="text-xs bg-zinc-800 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[#37e067]">8min</span>
+              </div>
+              <div className="flex items-center space-x-1.5 sm:space-x-2">
+                <User2 className="w-3 h-3 text-zinc-400" />
+                <p className="text-xs sm:text-sm text-zinc-400">Pedro Costa</p>
+              </div>
+            </div>
+          </div>
         </div>
-      </DragDropContext>
+
+        {/* Coluna Em Andamento */}
+        <div className="bg-gradient-to-b from-zinc-900/90 to-black/80 p-3 sm:p-4 rounded-xl border border-zinc-800 min-h-[250px] sm:min-h-[400px]">
+          <div className="flex items-center space-x-2 mb-3 sm:mb-4">
+            <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-[#37e067]" />
+            <h3 className="font-semibold text-base sm:text-lg text-white">Em Andamento</h3>
+          </div>
+          
+          <div className="space-y-2 sm:space-y-3">
+            <div className="bg-zinc-900 p-2.5 sm:p-3 rounded-lg border border-zinc-800">
+              <div className="flex justify-between items-start mb-1.5 sm:mb-2">
+                <h4 className="font-medium text-sm sm:text-base text-white">Problema Login</h4>
+                <span className="text-xs bg-zinc-800 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-yellow-500">12min</span>
+              </div>
+              <div className="flex items-center space-x-1.5 sm:space-x-2">
+                <User2 className="w-3 h-3 text-zinc-400" />
+                <p className="text-xs sm:text-sm text-zinc-400">Maria Santos</p>
+              </div>
+            </div>
+
+            <div className="bg-zinc-900 p-2.5 sm:p-3 rounded-lg border border-zinc-800">
+              <div className="flex justify-between items-start mb-1.5 sm:mb-2">
+                <h4 className="font-medium text-sm sm:text-base text-white">API WhatsApp</h4>
+                <span className="text-xs bg-zinc-800 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-yellow-500">20min</span>
+              </div>
+              <div className="flex items-center space-x-1.5 sm:space-x-2">
+                <User2 className="w-3 h-3 text-zinc-400" />
+                <p className="text-xs sm:text-sm text-zinc-400">Lucas Mendes</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Coluna Concluídos */}
+        <div className="bg-gradient-to-b from-zinc-900/90 to-black/80 p-3 sm:p-4 rounded-xl border border-zinc-800 min-h-[250px] sm:min-h-[400px]">
+          <div className="flex items-center space-x-2 mb-3 sm:mb-4">
+            <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-[#37e067]" />
+            <h3 className="font-semibold text-base sm:text-lg text-white">Concluídos</h3>
+          </div>
+          
+          <div className="space-y-2 sm:space-y-3">
+            <div className="bg-zinc-900 p-2.5 sm:p-3 rounded-lg border border-zinc-800">
+              <div className="flex justify-between items-start mb-1.5 sm:mb-2">
+                <h4 className="font-medium text-sm sm:text-base text-white">Setup Inicial</h4>
+                <span className="text-xs bg-zinc-800 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[#37e067]">Resolvido</span>
+              </div>
+              <div className="flex items-center space-x-1.5 sm:space-x-2">
+                <User2 className="w-3 h-3 text-zinc-400" />
+                <p className="text-xs sm:text-sm text-zinc-400">Carlos Oliveira</p>
+              </div>
+            </div>
+
+            <div className="bg-zinc-900 p-2.5 sm:p-3 rounded-lg border border-zinc-800">
+              <div className="flex justify-between items-start mb-1.5 sm:mb-2">
+                <h4 className="font-medium text-sm sm:text-base text-white">Chatbot Config</h4>
+                <span className="text-xs bg-zinc-800 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[#37e067]">Resolvido</span>
+              </div>
+              <div className="flex items-center space-x-1.5 sm:space-x-2">
+                <User2 className="w-3 h-3 text-zinc-400" />
+                <p className="text-xs sm:text-sm text-zinc-400">Fernanda Lima</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default memo(InteractiveKanban);
+export default AnimatedKanban;
