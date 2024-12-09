@@ -1,125 +1,160 @@
-# ZappFlow Landing Page
+# ZappFlow - Landing Page
 
-Este é o projeto da landing page do ZappFlow, construído com Next.js, TypeScript, Tailwind CSS e Framer Motion.
+Landing page moderna e responsiva para o ZappFlow, uma plataforma de automação de vendas via WhatsApp.
 
-## 🚀 Estrutura do Projeto
+## 🚀 Tecnologias Utilizadas
+
+- Next.js 13+ (App Router)
+- React
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- Shadcn/ui
+- Lucide Icons
+
+## 📁 Estrutura do Projeto
 
 ```
-ZappFlow LP/
-├── app/                    # Configurações principais do Next.js
-│   ├── globals.css        # Estilos globais e configurações do Tailwind
-│   ├── layout.tsx         # Layout principal da aplicação
-│   └── page.tsx           # Página inicial
-├── components/            # Componentes reutilizáveis
-│   ├── layout/           # Componentes de layout (Header, Footer, etc)
-│   ├── sections/         # Seções principais da landing page
-│   ├── features/         # Componentes de funcionalidades
+ZappFlow-LP/
+├── app/                    # Diretório principal do Next.js
+│   ├── layout.tsx         # Layout principal com Meta Pixel
+│   ├── page.tsx           # Página inicial
+│   └── globals.css        # Estilos globais
+├── components/            # Componentes React
+│   ├── layout/           # Componentes de layout
+│   │   ├── Header.tsx    # Navbar responsiva
+│   │   ├── Hero.tsx      # Seção inicial
+│   │   └── Footer.tsx    # Rodapé
+│   ├── sections/         # Seções principais
+│   │   ├── AutomationCTA.tsx
+│   │   ├── Dashboard.tsx
+│   │   ├── DemoVideo.tsx
+│   │   ├── FAQ.tsx
+│   │   ├── Pricing.tsx
+│   │   └── Testimonials.tsx
+│   ├── features/         # Componentes de recursos
+│   │   ├── FeatureCards.tsx
+│   │   └── ProductPreview.tsx
 │   └── ui/              # Componentes de UI reutilizáveis
-├── public/               # Arquivos estáticos (imagens, etc)
-└── styles/              # Estilos adicionais
-
-## 🎨 Padrões de Design
-
-### Cores
-- Principal: #37e067 (Verde)
-- Secundária: #32c95d (Verde escuro)
-- Fundo: #000000 (Preto)
-- Texto: #FFFFFF (Branco)
-- Texto secundário: #9CA3AF (Cinza)
-
-### Espaçamento
-- Mobile: 16px (1rem)
-- Tablet: 24px (1.5rem)
-- Desktop: 32px (2rem)
-
-### Breakpoints
-- sm: 640px
-- md: 768px
-- lg: 1024px
-- xl: 1280px
-
-## 🛠️ Como Fazer Alterações
-
-### 1. Editando Seções
-
-Cada seção da landing page está em um componente separado em `components/sections/`. Para editar uma seção:
-
-1. Localize o arquivo da seção em `components/sections/`
-2. Os componentes estão bem comentados para facilitar a edição
-3. Siga os padrões de comentários existentes ao adicionar novo código
-
-### 2. Alterando Estilos
-
-- Estilos globais: `app/globals.css`
-- Estilos específicos: Dentro de cada componente usando Tailwind CSS
-
-### 3. Adicionando Novas Seções
-
-1. Crie um novo arquivo em `components/sections/`
-2. Use o padrão de comentários existente
-3. Importe e adicione a seção em `app/page.tsx`
-
-### 4. Modificando Animações
-
-As animações são feitas com Framer Motion. Exemplo de uso:
-
-```tsx
-<motion.div
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{ duration: 0.5 }}
->
-  Conteúdo animado
-</motion.div>
+├── public/              # Arquivos estáticos
+│   ├── images/         # Imagens do site
+│   └── faviconzf.ico   # Favicon personalizado
+└── utils/              # Utilitários
+    └── motion.ts       # Configurações de animação
 ```
 
-### 5. Alterando Textos
+## 🎯 Principais Funcionalidades
 
-Os textos estão diretamente nos componentes para facilitar a edição. Procure pelo texto que deseja alterar no arquivo do componente correspondente.
+### Navegação
+- Navbar responsiva com menu mobile
+- Rolagem suave para seções
+- Links de navegação rápida
+
+### Seções
+1. **Hero**: Apresentação inicial com CTA principal
+2. **Demo**: Vídeo demonstrativo com efeitos imersivos
+3. **Automação**: Benefícios da automação
+4. **Recursos**: Cards de funcionalidades
+5. **Dashboard**: Preview da interface
+6. **Depoimentos**: Carrossel de testimoniais
+7. **Preços**: Planos e valores
+8. **FAQ**: Perguntas frequentes
+
+### UI/UX
+- Animações suaves com Framer Motion
+- Design responsivo para todos dispositivos
+- Efeitos de hover e feedback visual
+- Gradientes e blur effects modernos
+- Loading otimizado de imagens e vídeos
+
+### Analytics
+- Meta Pixel do Facebook integrado
+- Tracking de PageView configurado
+- ID do Pixel: 459482113848753
+
+## 🛠 Configuração e Instalação
+
+1. Clone o repositório:
+\`\`\`bash
+git clone https://github.com/negociosdigitaisjvm/zappflow-lp.git
+\`\`\`
+
+2. Instale as dependências:
+\`\`\`bash
+npm install
+# ou
+yarn install
+\`\`\`
+
+3. Execute o ambiente de desenvolvimento:
+\`\`\`bash
+npm run dev
+# ou
+yarn dev
+\`\`\`
+
+4. Acesse `http://localhost:3000`
 
 ## 📱 Responsividade
 
-O site usa classes responsivas do Tailwind:
-- `sm:` para telas >= 640px
-- `md:` para telas >= 768px
-- `lg:` para telas >= 1024px
-
-Exemplo:
-```tsx
-<div className="text-base sm:text-lg lg:text-xl">
-  Texto responsivo
-</div>
-```
+O site é totalmente responsivo com breakpoints:
+- Mobile: < 640px
+- Tablet: 640px - 1024px
+- Desktop: > 1024px
 
 ## 🔧 Manutenção
 
+### Alterando o Conteúdo
+- Textos e links podem ser editados diretamente nos componentes
+- Imagens devem ser adicionadas em `/public/images`
+- Novos componentes devem seguir a estrutura existente
+
 ### Performance
-- Use imagens otimizadas
-- Mantenha as animações leves
-- Evite aninhamento excessivo de elementos
+- Imagens são otimizadas pelo Next.js Image
+- Vídeo usa loading="lazy" para carregamento otimizado
+- Componentes usam animações com `viewport={{ once: true }}`
 
-### Boas Práticas
-- Mantenha os comentários atualizados
-- Use nomes descritivos para classes e variáveis
-- Siga o padrão de organização existente
+### SEO
+- Meta tags configuradas em `layout.tsx`
+- Estrutura HTML semântica
+- Alt text em todas as imagens
+- Favicon personalizado
 
-## 📦 Dependências Principais
+## 📈 Analytics
 
-- Next.js 13+
-- React 18+
-- Tailwind CSS
-- Framer Motion
-- Lucide Icons
-- Shadcn/ui
+O Meta Pixel está configurado para:
+- Tracking de PageView
+- Monitoramento de eventos de conversão
+- Retargeting de visitantes
 
-## 🤝 Contribuindo
+Para adicionar novos eventos:
+\`\`\`javascript
+fbq('track', 'NomeDoEvento', {
+  // parâmetros do evento
+});
+\`\`\`
 
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature
-3. Faça commit das alterações
-4. Faça push para a branch
-5. Abra um Pull Request
+## 🚀 Deploy
 
-## 📝 Licença
+O site está hospedado na Vercel com:
+- CI/CD automático
+- HTTPS habilitado
+- Otimizações de performance
+- Preview de branches
 
-Este projeto é proprietário e confidencial.
+## 📝 Notas Importantes
+
+1. Mantenha o arquivo `.env` seguro e fora do controle de versão
+2. Teste em diferentes navegadores após alterações
+3. Verifique o Meta Pixel após modificações
+4. Mantenha as dependências atualizadas
+
+## 🤝 Suporte
+
+Para suporte ou dúvidas, entre em contato através de:
+- Email: [contato@zappflow.com.br](mailto:contato@zappflow.com.br)
+- WhatsApp: [Link direto](https://wa.me/message/...)
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
