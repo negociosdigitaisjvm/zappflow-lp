@@ -5,6 +5,20 @@ import { ArrowRight, MessageSquare, Users, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Hero = () => {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.querySelector(sectionId);
+    if (element) {
+      const offset = 80; // Altura do header fixo
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <>
       <div className="relative min-h-[80vh] bg-black pt-20 pb-12 overflow-hidden" id="hero">
@@ -101,6 +115,7 @@ const Hero = () => {
                 size="lg"
                 variant="outline"
                 className="w-full sm:w-auto border-[#37e067] text-[#37e067] hover:bg-[#37e067] hover:text-black transition-all hover:scale-105 text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6"
+                onClick={() => scrollToSection('#pricing')}
               >
                 Planos e Preços
                 <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />

@@ -7,8 +7,22 @@ import InteractiveKanban from '../features/InteractiveKanban';
 import { AnimatedSection, AnimatedFade } from '@/components/ui/animated-section';
 
 const Dashboard = () => {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.querySelector(sectionId);
+    if (element) {
+      const offset = 80; // Altura do header fixo
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
-    <section className="relative bg-black py-12 sm:py-16 lg:py-24 overflow-hidden" id="dashboard">
+    <section className="relative bg-black py-8 sm:py-12 lg:py-16 overflow-hidden" id="dashboard">
       {/* Elementos de fundo */}
       <div className="absolute inset-0">
         <div className="absolute w-[800px] h-[800px] top-1/2 -right-40 bg-[#37e067]/5 rounded-full blur-[100px] animate-pulse" />
@@ -80,6 +94,7 @@ const Dashboard = () => {
             <Button 
               size="lg"
               className="w-full sm:w-auto bg-[#37e067] text-black hover:bg-[#32c95d] transform hover:scale-105 transition-all duration-300 text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 rounded-xl shadow-lg shadow-[#37e067]/20 hover:shadow-[#37e067]/40"
+              onClick={() => scrollToSection('#pricing')}
             >
               COMECE SEU TESTE GRÁTIS
               <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />

@@ -5,10 +5,10 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'ZappFlow - Automatize seu WhatsApp Business',
-  description: 'Automatize seu atendimento no WhatsApp e aumente suas vendas com nossa plataforma inteligente.',
+  title: 'ZappFlow - Automatize suas vendas no WhatsApp',
+  description: 'Automatize suas vendas no WhatsApp com o ZappFlow. A ferramenta completa para gestão e automação de atendimento.',
   icons: {
-    icon: '/favicon.ico',
+    icon: '/faviconzf.ico',
   },
 };
 
@@ -18,10 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR" className="scroll-smooth">
-      <body className={`${inter.className} antialiased`}>
-        {children}
-      </body>
+    <html lang="pt-BR">
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }

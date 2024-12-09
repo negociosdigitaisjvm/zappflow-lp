@@ -32,8 +32,22 @@ const testimonials = [
 ];
 
 const Testimonials = () => {
+    const scrollToSection = (sectionId: string) => {
+        const element = document.querySelector(sectionId);
+        if (element) {
+            const offset = 80; // Altura do header fixo
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+    };
+
     return (
-        <section className="relative bg-black py-16 sm:py-24 overflow-hidden" id="testimonials">
+        <section className="relative bg-black py-8 sm:py-12 lg:py-16 overflow-hidden" id="testimonials">
             {/* Elementos de fundo */}
             <div className="absolute inset-0">
                 <div className="absolute w-[600px] h-[600px] top-1/2 -right-40 bg-[#37e067]/5 rounded-full blur-3xl" />
@@ -99,7 +113,10 @@ const Testimonials = () => {
                         Enquanto você lê isso, seus concorrentes já estão{' '}
                         <span className="text-[#37e067]">vendendo mais</span>
                     </p>
-                    <button className="bg-[#37e067] text-black px-8 py-4 rounded-lg text-lg font-bold hover:bg-[#37e067]/90 transition-colors duration-300 flex items-center mx-auto">
+                    <button 
+                        className="bg-[#37e067] text-black px-8 py-4 rounded-lg text-lg font-bold hover:bg-[#37e067]/90 transition-colors duration-300 flex items-center mx-auto"
+                        onClick={() => scrollToSection('#pricing')}
+                    >
                         Começar a Vender Mais Agora
                         <span className="ml-2">→</span>
                     </button>

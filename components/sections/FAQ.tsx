@@ -49,7 +49,7 @@ const FAQ = () => {
     },
     {
       question: 'Como funciona o período de teste gratuito?',
-      answer: 'Oferecemos 7 dias de teste totalmente gratuito, com acesso a todas as funcionalidades da plataforma. Não exigimos cartão de crédito para começar, e você pode cancelar a qualquer momento.',
+      answer: 'Oferecemos 3 dias de teste totalmente gratuito, com acesso a todas as funcionalidades da plataforma. Não exigimos cartão de crédito para começar, e você pode cancelar a qualquer momento.',
       icon: Clock
     },
     {

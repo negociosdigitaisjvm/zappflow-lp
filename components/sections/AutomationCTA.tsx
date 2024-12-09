@@ -5,8 +5,22 @@ import { ArrowRight, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const AutomationCTA = () => {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.querySelector(sectionId);
+    if (element) {
+      const offset = 80; // Altura do header fixo
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
-    <section className="relative bg-black py-12 sm:py-16 lg:py-24 overflow-hidden" id="automation-cta">
+    <section className="relative bg-black py-8 sm:py-12 lg:py-16 overflow-hidden" id="automation-cta">
       {/* Elementos de fundo */}
       <div className="absolute inset-0">
         <motion.div 
@@ -69,8 +83,9 @@ const AutomationCTA = () => {
               <Button 
                 size="lg"
                 className="w-full sm:w-auto bg-[#37e067] text-black hover:bg-[#32c95d] transform hover:scale-105 transition-all duration-300 text-base sm:text-lg px-6 sm:px-10 py-6 sm:py-7 rounded-xl shadow-lg shadow-[#37e067]/20 hover:shadow-[#37e067]/40 font-semibold"
+                onClick={() => scrollToSection('#pricing')}
               >
-                COMECE AGORA GRATUITAMENTE
+                COMECE A VENDER MAIS AGORA
                 <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
               </Button>
               <p className="mt-4 text-gray-400 text-sm">Sem cartão de crédito • Setup em 5 minutos</p>

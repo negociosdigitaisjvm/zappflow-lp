@@ -1,5 +1,6 @@
 import Header from '@/components/layout/Header';
 import Hero from '@/components/layout/Hero';
+import DemoVideo from '@/components/sections/DemoVideo';
 import FeatureCards from '@/components/features/FeatureCards';
 import ProductPreview from '@/components/features/ProductPreview';
 import AutomationCTA from '@/components/sections/AutomationCTA';
@@ -14,6 +15,7 @@ export default function Home() {
     <main className="min-h-screen bg-black">
       <Header />
       <Hero />
+      <DemoVideo />
       <AutomationCTA />
       <FeatureCards />
       <Dashboard />

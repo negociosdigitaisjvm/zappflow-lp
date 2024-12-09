@@ -5,8 +5,22 @@ import { Button } from '@/components/ui/button';
 import { Play, MessageSquare, BarChart3, Settings2, ArrowRight } from 'lucide-react';
 
 const ProductPreview = () => {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.querySelector(sectionId);
+    if (element) {
+      const offset = 80; // Altura do header fixo
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
-    <section className="relative bg-black py-24 overflow-hidden">
+    <section className="relative bg-black py-8 sm:py-12 lg:py-16 overflow-hidden" id="product-preview">
       {/* Gradiente de Fundo */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#1E1E1E] to-black" />
       
@@ -65,6 +79,7 @@ const ProductPreview = () => {
               <Button 
                 size="lg"
                 className="w-full sm:w-auto bg-[#37e067] text-black hover:bg-[#32c95d] transform hover:scale-105 transition-all text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6"
+                onClick={() => scrollToSection('#pricing')}
               >
                 Experimente Gratuitamente
                 <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />

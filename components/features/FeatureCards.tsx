@@ -27,8 +27,22 @@ const features = [
 ];
 
 const FeatureCards = () => {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.querySelector(sectionId);
+    if (element) {
+      const offset = 80; // Altura do header fixo
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
-    <section className="relative bg-[#1E1E1E] py-16 sm:py-20 overflow-hidden" id="features">
+    <section className="relative bg-[#1E1E1E] py-8 sm:py-12 lg:py-16 overflow-hidden" id="features">
       {/* Elementos de Fundo */}
       <div className="absolute inset-0">
         <div className="absolute w-[800px] h-[800px] -top-40 -right-40 bg-[#37e067]/5 rounded-full blur-3xl" />
@@ -67,12 +81,6 @@ const FeatureCards = () => {
               <p className="text-gray-400 transition-all group-hover:text-gray-300">
                 {feature.description}
               </p>
-
-              {/* Link Saiba Mais */}
-              <div className="mt-4 flex items-center text-[#37e067] opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all">
-                <span className="text-sm font-medium">Saiba mais</span>
-                <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-              </div>
             </div>
           ))}
         </div>
@@ -82,6 +90,7 @@ const FeatureCards = () => {
           <Button 
             size="lg"
             className="w-full sm:w-auto bg-[#37e067] text-black hover:bg-[#32c95d] transform hover:scale-105 transition-all animate-glow text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6"
+            onClick={() => scrollToSection('#pricing')}
           >
             COMECE A VENDER MAIS AGORA
             <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
