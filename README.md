@@ -158,3 +158,17 @@ Para suporte ou dúvidas, entre em contato através de:
 ## 📄 Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
+
+<p align="center">
+  <br>
+  <img src="https://raw.githubusercontent.com/negociosdigitaisjvm/zappflow-lp/master/public/images/logo.png" alt="Logo ZappFlow" width="150">
+  <br>
+  <br>
+  Feito com ❤️ por <a href="https://github.com/guilhermemotta">Guilherme Motta</a>
+  <br>
+  TMND - Trust Me, No Drama
+  <br>
+  2024 ZappFlow. Todos os direitos reservados.
+</p>
