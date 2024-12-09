@@ -93,7 +93,6 @@ npm run dev
 yarn dev
 \`\`\`
 
-4. Acesse `http://localhost:3000`
 
 ## 📱 Responsividade
 
@@ -152,8 +151,8 @@ O site está hospedado na Vercel com:
 ## 🤝 Suporte
 
 Para suporte ou dúvidas, entre em contato através de:
-- Email: [contato@zappflow.com.br](mailto:contato@zappflow.com.br)
-- WhatsApp: [Link direto](https://wa.me/message/...)
+- Email: [contato@zappflow.com.br](mailto:contato@zappflow.app)
+- WhatsApp: [Link direto](https://api.whatsapp.com/send?phone=553799477799&text=Ol%C3%A1!%20Tenho%20interesse%20e%20gostaria%20de%20falar%20com%20um%20especialista.%20Pode%20me%20ajudar%3F%20%F0%9F%98%89)
 
 ## 📄 Licença
 
@@ -163,12 +162,12 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 <p align="center">
   <br>
-  <img src="https://raw.githubusercontent.com/negociosdigitaisjvm/zappflow-lp/master/public/images/logo.png" alt="Logo ZappFlow" width="150">
+  <img src="https://ibb.co/2nQM2h6" alt="Logo ZappFlow" width="150">
   <br>
   <br>
-  Feito com ❤️ por <a href="https://github.com/guilhermemotta">Guilherme Motta</a>
+  Feito com ❤️ por <a href="https://www.instagram.com/marraecom">Guilherme Marra</a>
   <br>
-  TMND - Trust Me, No Drama
+  TMND 
   <br>
   2024 ZappFlow. Todos os direitos reservados.
 </p>
