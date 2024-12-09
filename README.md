@@ -70,7 +70,7 @@ ZappFlow-LP/
 ### Analytics
 - Meta Pixel do Facebook integrado
 - Tracking de PageView configurado
-- ID do Pixel: 459482113848753
+- Monitoramento de eventos de conversão
 
 ## 🛠 Configuração e Instalação
 
